@@ -6,9 +6,12 @@ import xml.etree.ElementTree as etree
 import time
 import smtplib
 import email
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import urllib
 import json
 import twitter
+import sys
 
 def parse_item_or_list(either):
     if 'xmlUrl' in either.attrib:
@@ -61,6 +64,7 @@ def parse_feeds(opml_loc):
         feeds = [ feedparser.parse(feed) for feed in opml]
         return [{'title': feed_title(feed), 'entries': recent_items_for_feed(feed.entries)} for feed in feeds] 
     except:
+        print('failure')
         return []
     
     
@@ -74,7 +78,7 @@ def get_weather(apikey, location):
     except:
         return str(time.localtime().tm_yday) + ": weather error" 
 
-def send_email(title, body):
+def send_email(title, body, setup):
     try:
         msg = MIMEMultipart('alternative')
         msg['Subject'] = title 
@@ -89,6 +93,7 @@ def send_email(title, body):
         s.quit()
         return 1
     except:
+        print('email failure? ', sys.exc_info())
         return 0
 
     
@@ -107,7 +112,8 @@ def main():
     setup=json.load(open('feed_digest.json','r'))
     send_email(get_weather(setup['weather_api_key'],
                            setup['weather_location']), 
-               feeds_to_html(parse_feeds(setup['opml_location'])))
+               feeds_to_html(parse_feeds(setup['opml_location'])),
+               setup)
     
     
 if __name__ == "__main__":
