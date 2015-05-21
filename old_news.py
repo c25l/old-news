@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 import feedparser
@@ -132,7 +132,7 @@ def get_twitter(setup):
 
 
 def main():
-    setup=json.load(open('feed_digest.json','r'))
+    setup=json.load(open(sys.argv[1],'r'))
     send_email(get_weather(setup['weather_api_key'],
                            setup['weather_location']), 
                feeds_to_html(parse_feeds(setup['feeds'])) +
