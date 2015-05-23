@@ -81,14 +81,14 @@ def send_email(title, body, setup):
     try:
         msg = MIMEMultipart('alternative')
         msg['Subject'] = title 
-        msg['From'] = "\"Old News\" <" +setup['email_dest']+">"
+        msg['From'] = "\"Old News\" <" +setup['email_source']+">"
         msg['To'] = setup['email_dest']
         html = str(body)
         part2 = MIMEText(html, 'html')
         msg.attach(part2)
         s = smtplib.SMTP_SSL('smtp.gmail.com',465)
-        s.login(setup['email_dest'], setup['email_pass'])
-        s.sendmail(setup['email_dest'], setup['email_dest'], msg.as_string())
+        s.login(setup['email_source'], setup['email_pass'])
+        s.sendmail(setup['email_source'], setup['email_dest'], msg.as_string())
         s.quit()
         return True
     except:
