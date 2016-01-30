@@ -1,0 +1,27 @@
+{"email_pass": "",
+"email":"",
+ "feeds" : {"comics/humor" : ["http://www.rsspect.com/rss/vagrant.xml",
+			      "http://www.robot-hugs.com/feed/",
+			      "http://rsspect.com/rss/qwantz.xml",
+			      "http://nedroid.com/feed/",
+			      "http://thebloggess.com/feed/",
+			      "http://feeds.feedburner.com/PoorlyDrawnLines"],
+	    "programming" : [
+		"http://gigasquidsoftware.com/atom.xml",
+		"http://endlessparentheses.com/atom.xml",
+		"http://blog.fogus.me/feed/"],
+	    "science": [
+		"http://www.slate.com/blogs/bad_astronomy.fulltext.all.10.rss",
+		"http://slatestarcodex.com/feed/",
+		"http://allendowney.blogspot.com/feeds/posts/default",
+		"http://apod.nasa.gov/apod.rss",
+		"http://www.stat.columbia.edu/~cook/movabletype/mlm/atom.xml",
+		"http://www.unofficialgoogledatascience.com/feeds/posts/default",
+		"http://varianceexplained.org/feed.xml"],
+	    "culture": [
+		"http://feeds.feedburner.com/marginalrevolution/feed",
+		"http://www.interfluidity.com/feed",
+		"http://feeds.feedburner.com/MeFi/PopularPosts7",
+		"http://feeds.poetryfoundation.org/PoetryFoundation/PoemOfTheDayText",
+		"http://literati.club/comments/feed",
+		"http://literati.club/feed/"]}}

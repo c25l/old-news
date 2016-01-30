@@ -10,8 +10,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import urllib
 import json
-import twitter
 import sys
+import pybloom as pb
 import datetime
 import dateutil.parser
 
@@ -22,10 +22,16 @@ def parse_item_or_list(either):
         return [x.attrib['xmlUrl'] for x in either]
     return 0
 
-
-def recent_items_for_feed(feed):
-    if len(feed)>0 and feedtime(feed[0]): 
-        return [feed_info(x) for x in feed if recent(x)]
+def bloom_detect(x, bloom):
+    inf=feed_info(x)
+    key = inf['title']+ "////" + inf['summary']
+    if key not in bloom:
+        bloom.add(key)
+        return inf
+    
+def unseen_items_for_feed(feed, bloom):
+    if len(feed)>0:
+        return [z for z in [bloom_detect(x,bloom) for x in feed] if z]
     elif len(feed)>0:
         return [feed_info(feed[0])]
 
@@ -39,61 +45,26 @@ def feed_title(feed):
 def feed_info(feed):
     return {'title':feed.title, 'summary':feed.summary, 'link':feed.link}
 
-
-def recent(feed):
-    return time.mktime(time.localtime()) - time.mktime(feedtime(feed)) < 60*60*26
-
-def recent_tweet(tweet):
-    tdiff = time.mktime(datetime.datetime.now().timetuple()) - time.mktime(dateutil.parser.parse(tweet['created_at']).timetuple())
-    return tdiff < 60*60*26
-
-def feedtime (feed):
-    if 'published' in feed:
-        return feed.published_parsed
-    elif 'updated' in feed:
-        return feed.updated_parsed
-    elif 'created' in feed:
-        return feed.created_parsed
-    else:
-        return False
     
-    
-def parse_feeds(feed_uris):
-    try:
+def parse_feeds(feed_uris,bloom):
         feeds = [ feedparser.parse(feed) for feed in feed_uris]
-        return [{'title': feed_title(feed), 'entries': recent_items_for_feed(feed.entries)} for feed in feeds] 
-    except:
-        print('feed parse failure')
-        return []
+        return [{'title': feed_title(feed), 'entries': unseen_items_for_feed(feed.entries, bloom)} for feed in feeds] 
+        
     
     
-def get_weather(apikey, location):
-    try:
-        f = urllib.request.urlopen('http://api.wunderground.com/api/'+apikey+'/geolookup/forecast/q/'+location+'.json')
-        json_string = f.read().decode('utf-8')
-        parsed = json.loads(json_string)['forecast']['simpleforecast']['forecastday'][0]
-        f.close()
-        return str(parsed['date']['yday']) + ": "+ parsed['conditions']+ ", "+parsed['high']['celsius'] +"/"+parsed['low']['celsius']
-    except:
-        return str(time.localtime().tm_yday) + ": weather error" 
-
 def send_email(title, body, setup):
-    try:
-        msg = MIMEMultipart('alternative')
-        msg['Subject'] = title 
-        msg['From'] = "\"Old News\" <" +setup['email_source']+">"
-        msg['To'] = setup['email_dest']
-        html = str(body)
-        part2 = MIMEText(html, 'html')
-        msg.attach(part2)
-        s = smtplib.SMTP_SSL('smtp.gmail.com',465)
-        s.login(setup['email_source'], setup['email_pass'])
-        s.sendmail(setup['email_source'], setup['email_dest'], msg.as_string())
-        s.quit()
-        return True
-    except:
-        print('email failure? ', sys.exc_info())
-        return False
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = title 
+    msg['From'] = "\"Old News\" <" +setup['email']+">"
+    msg['To'] = setup['email']
+    html = body.encode('utf-8', 'ignore')
+    part2 = MIMEText(html, 'html')
+    msg.attach(part2)
+    s = smtplib.SMTP_SSL('smtp.gmail.com',465)
+    s.login(setup['email'], setup['email_pass'])
+    s.sendmail(setup['email'], setup['email'], msg.as_string())
+    s.quit()
+    return True
 
     
 def feeds_to_html(feeds):
@@ -102,42 +73,27 @@ def feeds_to_html(feeds):
         if x['entries']:
             outstr+="<h3>"+x['title']+"</h3><br>"
             for y in x['entries']:
-                outstr+="<a href=" + y['link'] +">"+y['title']+"</a><br>" + y['summary'][:500]+ "<br><br>\n" 
+                outstr+="<a href=" + y['link'] +">"+y['title']+"</a><br>" + y['summary']+ "<br><br>\n" 
             outstr+="<hr>"
     return outstr+"</body>"
 
 
-def twitter_to_html(tweets):
-    outstr="<body> Twitter: <br>\n"
-    for x in tweets:
-        outstr+= "<h4><img src=\""+x['image']+"\"> @"+x['screen_name']+ "  " + x['user'] + "<br></h4>\n"
-        outstr+= x['text'] + " <br><br>"
-    return outstr + "</body>\n"
-
-def get_twitter(setup):
-    try:
-        twit = twitter.Twitter(auth=twitter.OAuth(setup['twitter_access_token'],
-                                                  setup['twitter_access_secret'],
-                                                  setup['twitter_consumer_key'],
-                                                  setup['twitter_consumer_secret']))
-        return [{"time": x['created_at'], 
-                 "text": x['text'], 
-                 "user": x['user']['name'], 
-                 "image": x['user']['profile_image_url'], 
-                 "screen_name": x['user']['screen_name']}  
-                for x in twit.statuses.home_timeline(count=40) if recent_tweet(x)]
-    except:
-        print("twitter error", sys.exc_info())
-        return []
-
-
 def main():
     setup=json.load(open(sys.argv[1],'r'))
-    send_email(get_weather(setup['weather_api_key'],
-                           setup['weather_location']), 
-               feeds_to_html(parse_feeds(setup['feeds'])) +
-               twitter_to_html(get_twitter(setup)),
-               setup)
+    bloom=pb.BloomFilter(1000000)
+    bloomloc=sys.argv[2]
+    try:
+        bloom=bloom.fromfile(open(bloomloc,'r'))
+    except:
+        print "starting over"
+        pass
+    for x,y in setup['feeds'].iteritems():
+        z = feeds_to_html(parse_feeds(y, bloom))
+        if len(z) > 15:
+            send_email("RSS digest: " + x, 
+                       z,
+                       setup)
+    bloom.tofile(open(bloomloc,'w'))
     
 if __name__ == "__main__":
     main()
