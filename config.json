@@ -1,27 +1,40 @@
-{"email_pass": "",
-"email":"",
- "feeds" : {"comics/humor" : ["http://www.rsspect.com/rss/vagrant.xml",
+{"comics" : ["http://www.rsspect.com/rss/vagrant.xml",
 			      "http://www.robot-hugs.com/feed/",
 			      "http://rsspect.com/rss/qwantz.xml",
 			      "http://nedroid.com/feed/",
-			      "http://thebloggess.com/feed/",
-			      "http://feeds.feedburner.com/PoorlyDrawnLines"],
+			"http://feeds.feedburner.com/PoorlyDrawnLines"],
+	    "humor" : [
+		"http://thebloggess.com/feed/"],
+	    "games" : ["http://www.shutupandsitdown.com/blog/feed.xml"],
 	    "programming" : [
 		"http://gigasquidsoftware.com/atom.xml",
 		"http://endlessparentheses.com/atom.xml",
 		"http://blog.fogus.me/feed/"],
-	    "science": [
+	    "astronomy": [
 		"http://www.slate.com/blogs/bad_astronomy.fulltext.all.10.rss",
+		"http://apod.nasa.gov/apod.rss"],
+	    "science": [
 		"http://slatestarcodex.com/feed/",
 		"http://allendowney.blogspot.com/feeds/posts/default",
-		"http://apod.nasa.gov/apod.rss",
 		"http://www.stat.columbia.edu/~cook/movabletype/mlm/atom.xml",
 		"http://www.unofficialgoogledatascience.com/feeds/posts/default",
 		"http://varianceexplained.org/feed.xml"],
 	    "culture": [
-		"http://feeds.feedburner.com/marginalrevolution/feed",
 		"http://www.interfluidity.com/feed",
 		"http://feeds.feedburner.com/MeFi/PopularPosts7",
-		"http://feeds.poetryfoundation.org/PoetryFoundation/PoemOfTheDayText",
+		"http://feeds.poetryfoundation.org/PoetryFoundation/PoemOfTheDayText"],
+	    "book club": [
 		"http://literati.club/comments/feed",
-		"http://literati.club/feed/"]}}
+		"http://literati.club/feed/"],
+	    "reddit": [
+		"http://www.reddit.com/r/emacs.rss",
+		"http://www.reddit.com/r/IPython.rss",
+		"http://www.reddit.com/r/lisp.rss",
+		"http://www.reddit.com/r/Longmont.rss",
+		"http://www.reddit.com/r/orgmode.rss",
+		"http://www.reddit.com/r/parentsofmultiples.rss",
+		"http://www.reddit.com/r/probabilitytheory.rss",
+		"http://www.reddit.com/r/puremathematics.rss",
+		"http://www.reddit.com/r/pystats.rss",
+		"http://www.reddit.com/r/statistics.rss"
+	    ]}

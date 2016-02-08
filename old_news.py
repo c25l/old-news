@@ -71,23 +71,24 @@ def feeds_to_html(feeds):
     outstr="<body>"
     for x in feeds:
         if x['entries']:
-            outstr+="<h3>"+x['title']+"</h3><br>"
+            outstr+="<h2>"+x['title']+"</h2><br>"
             for y in x['entries']:
-                outstr+="<a href=" + y['link'] +">"+y['title']+"</a><br>" + y['summary']+ "<br><br>\n" 
+                outstr+="<a href=" + y['link'] +">"+y['title']+"</a><br>\n" 
             outstr+="<hr>"
     return outstr+"</body>"
 
 
 def main():
     setup=json.load(open(sys.argv[1],'r'))
+    feeds=json.load(open(sys.argv[2],'r'))
     bloom=pb.BloomFilter(1000000)
-    bloomloc=sys.argv[2]
+    bloomloc=sys.argv[3]
     try:
         bloom=bloom.fromfile(open(bloomloc,'r'))
     except:
         print "starting over"
         pass
-    for x,y in setup['feeds'].iteritems():
+    for x,y in feeds.iteritems():
         z = feeds_to_html(parse_feeds(y, bloom))
         if len(z) > 15:
             send_email("RSS digest: " + x, 
