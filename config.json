@@ -1,36 +1,30 @@
-{"comics" : ["http://www.rsspect.com/rss/vagrant.xml",
-			      "http://www.robot-hugs.com/feed/",
-			      "http://rsspect.com/rss/qwantz.xml",
-			      "http://nedroid.com/feed/",
-			"http://feeds.feedburner.com/PoorlyDrawnLines"],
-	    "humor" : [
-		"http://thebloggess.com/feed/",
-		"http://www.shutupandsitdown.com/blog/feed.xml"],
+{
 	    "programming" : [
 		"http://gigasquidsoftware.com/atom.xml",
 		"http://endlessparentheses.com/atom.xml",
 		"http://blog.fogus.me/feed/",
-		"http://planet.emacsen.org/atom.xml"],
-	    "astronomy": [
-		"http://www.slate.com/blogs/bad_astronomy.fulltext.all.10.rss",
-		"http://apod.nasa.gov/apod.rss"],
+		"http://planet.emacsen.org/atom.xml",
+                "https://planet.haskell.org/rss20.xml"],
 	    "science": [
+		"http://apod.nasa.gov/apod.rss",
 		"http://slatestarcodex.com/feed/",
 		"http://allendowney.blogspot.com/feeds/posts/default",
 		"http://www.stat.columbia.edu/~cook/movabletype/mlm/atom.xml",
 		"http://www.unofficialgoogledatascience.com/feeds/posts/default",
 		"http://varianceexplained.org/feed.xml"],
 	    "culture": [
+                "http://thebloggess.com/feed/",
+		"http://www.shutupandsitdown.com/blog/feed.xml",
 		"http://www.interfluidity.com/feed",
 		"http://feeds.feedburner.com/MeFi/PopularPosts7",
-		"http://feeds.poetryfoundation.org/PoetryFoundation/PoemOfTheDayText"],
-	    "book club": [
+		"http://feeds.poetryfoundation.org/PoetryFoundation/PoemOfTheDayText",
 		"http://literati.club/comments/feed",
 		"http://literati.club/feed/"],
 	    "reddit": [
 		"http://www.reddit.com/r/emacs.rss",
 		"http://www.reddit.com/r/IPython.rss",
 		"http://www.reddit.com/r/lisp.rss",
+                "http://www.reddit.com/r/stoicism.rss",
 		"http://www.reddit.com/r/Longmont.rss",
 		"http://www.reddit.com/r/orgmode.rss",
 		"http://www.reddit.com/r/parentsofmultiples.rss",
