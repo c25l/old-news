@@ -64,6 +64,7 @@ def send_email(title, body, setup):
     s.login(setup['email'], setup['email_pass'])
     s.sendmail(setup['email'], setup['email'], msg.as_string())
     s.quit()
+    print "sent email"
     return True
 
 
@@ -90,6 +91,7 @@ def main():
         pass
     for x,y in feeds.iteritems():
         z = feeds_to_html(parse_feeds(y, bloom))
+        print x
         if len(z) > 15:
             send_email("RSS digest: " + x,
                        z,
