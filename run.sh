@@ -1,3 +1,8 @@
 #!/bin/bash
-cd /home/chris/Dropbox/Rss_Digest/
-/home/chris/miniconda2/bin/python rss_digest.py authinfo.json config.json bloom.bl
+echo "running RSS_Digest!"
+SCRIPTPATH=$(dirname "$BASH_SOURCE")
+source $HOME/.profile
+cd $SCRIPTPATH
+source activate rss
+python rss_digest.py authinfo.json config.json bloom.bl
+source deactivate
