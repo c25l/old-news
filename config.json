@@ -1,13 +1,7 @@
 {
 	    "programming" : [
-		"http://gigasquidsoftware.com/atom.xml",
-		"http://endlessparentheses.com/atom.xml",
 		"http://blog.fogus.me/feed/",
 		"http://planet.emacsen.org/atom.xml",
-                "http://www.reddit.com/r/emacs.rss",
-		"http://www.reddit.com/r/IPython.rss",
-		"http://www.reddit.com/r/lisp.rss",
-                "http://www.reddit.com/r/orgmode.rss",  
                 "https://planet.haskell.org/rss20.xml"],
 	    "science": [
 		"http://apod.nasa.gov/apod.rss",
@@ -15,10 +9,6 @@
 		"http://allendowney.blogspot.com/feeds/posts/default",
 		"http://www.stat.columbia.edu/~cook/movabletype/mlm/atom.xml",
 		"http://www.unofficialgoogledatascience.com/feeds/posts/default",
-                "http://www.reddit.com/r/probabilitytheory.rss",
-		"http://www.reddit.com/r/puremathematics.rss",
-		"http://www.reddit.com/r/pystats.rss",
-		"http://www.reddit.com/r/statistics.rss",
 		"http://varianceexplained.org/feed.xml"],
 	    "culture": [
                 "http://thebloggess.com/feed/",
@@ -29,8 +19,7 @@
                 "visualizingmath.tumblr.com/rss",
                 "http://geometric-aesthetic.tumblr.com/rss",
 		"http://feeds.feedburner.com/MeFi/PopularPosts7",
-		"http://feeds.poetryfoundation.org/PoetryFoundation/PoemOfTheDayText",
+                "http://www.longmontcolorado.gov/Home/Components/RssFeeds/RssFeed/View?id=5",
                 "http://www.reddit.com/r/Longmont.rss",
-		"http://www.reddit.com/r/parentsofmultiples.rss",
 		"http://literati.club/comments/feed",
 		"http://literati.club/feed/"]}
