@@ -1,25 +1,26 @@
 {
-	    "programming" : [
-		"http://blog.fogus.me/feed/",
-		"http://planet.emacsen.org/atom.xml",
-                "https://planet.haskell.org/rss20.xml"],
-	    "science": [
-		"http://apod.nasa.gov/apod.rss",
-		"http://slatestarcodex.com/feed/",
-		"http://allendowney.blogspot.com/feeds/posts/default",
-		"http://www.stat.columbia.edu/~cook/movabletype/mlm/atom.xml",
-		"http://www.unofficialgoogledatascience.com/feeds/posts/default",
-		"http://varianceexplained.org/feed.xml"],
-	    "culture": [
-                "http://thebloggess.com/feed/",
-		"http://www.shutupandsitdown.com/blog/feed.xml",
-                "http://www.epictetan.org/2/feed",
-		"http://www.interfluidity.com/feed",
-                "theartofanimation.tumblr.com/rss",
-                "visualizingmath.tumblr.com/rss",
-                "http://geometric-aesthetic.tumblr.com/rss",
-		"http://feeds.feedburner.com/MeFi/PopularPosts7",
-                "http://www.longmontcolorado.gov/Home/Components/RssFeeds/RssFeed/View?id=5",
-                "http://www.reddit.com/r/Longmont.rss",
-		"http://literati.club/comments/feed",
-		"http://literati.club/feed/"]}
+    "programming" : [
+	"http://blog.fogus.me/feed/",
+	"http://planet.emacsen.org/atom.xml",
+        "https://planet.haskell.org/rss20.xml"],
+    "science": [
+        "http://bactra.org/weblog/index.rss",
+	"http://apod.nasa.gov/apod.rss",
+	"http://slatestarcodex.com/feed/",
+	"http://allendowney.blogspot.com/feeds/posts/default",
+	"http://www.stat.columbia.edu/~cook/movabletype/mlm/atom.xml",
+	"http://www.unofficialgoogledatascience.com/feeds/posts/default",
+	"http://varianceexplained.org/feed.xml"],
+    "culture": [
+        "http://thebloggess.com/feed/",
+	"http://www.shutupandsitdown.com/blog/feed.xml",
+        "http://www.epictetan.org/2/feed",
+	"http://www.interfluidity.com/feed",
+        "theartofanimation.tumblr.com/rss",
+        "visualizingmath.tumblr.com/rss",
+        "http://geometric-aesthetic.tumblr.com/rss",
+	"http://feeds.feedburner.com/MeFi/PopularPosts7",
+        "http://www.longmontcolorado.gov/Home/Components/RssFeeds/RssFeed/View?id=5",
+        "http://www.reddit.com/r/Longmont.rss",
+	"http://literati.club/comments/feed",
+	"http://literati.club/feed/"]}

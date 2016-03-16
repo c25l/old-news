@@ -4,5 +4,5 @@ SCRIPTPATH=$(dirname "$BASH_SOURCE")
 source $HOME/.profile
 cd $SCRIPTPATH
 source activate rss
-python rss_digest.py authinfo.json config.json bloom.bl
+python rss_digest.py config.json bloom.bl
 source deactivate
