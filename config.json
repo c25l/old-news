@@ -1,8 +1,12 @@
 {"science": [
-    "http://www.unofficialgoogledatascience.com/feeds/posts/default"],
+    "http://www.unofficialgoogledatascience.com/feeds/posts/default"
+],
     "culture": [
         "http://thebloggess.com/feed/",
         "http://www.longmontcolorado.gov/Home/Components/RssFeeds/RssFeed/View?id=5",
 	"http://literati.club/comments/feed",
-	"http://literati.club/feed/"],
-    "comics": ["http://www.smbc-comics.com/rss.php"]}
+	"http://literati.club/feed/",
+	"http://www.metafilter.com/mymefi/AF8CE07E0976FF4F/rss"
+    ],
+ "comics": ["http://www.smbc-comics.com/rss.php"
+	   ]}
