@@ -55,14 +55,14 @@ def parse_feeds(feed_uris,bloom):
 def send_email(title, body, setup):
     msg = MIMEMultipart('alternative')
     msg['Subject'] = title
-    msg['From'] = "\"Rss Digest\" <" +setup['email']+">"
-    msg['To'] = setup['email']
+    msg['From'] = "\"Rss Digest\" <" +setup['email_from']+">"
+    msg['To'] = setup['email_to']
     html = body.encode('utf-8', 'ignore')
     part2 = MIMEText(html, 'html')
     msg.attach(part2)
     s = smtplib.SMTP_SSL('smtp.gmail.com',465)
-    s.login(setup['email'], setup['email_pass'])
-    s.sendmail(setup['email'], setup['email'], msg.as_string())
+    s.login(setup['email_from'], setup['email_pass'])
+    s.sendmail(setup['email_from'], setup['email_to'], msg.as_string())
     s.quit()
     print "sent email"
     return True
@@ -89,13 +89,17 @@ def main():
     except:
         print "starting over"
         pass
+    z = ""
+    totx= 0
     for x,y in feeds.iteritems():
-        z = feeds_to_html(parse_feeds(y, bloom))
+        tempx ="<h1>" + x + "</h1><br>\n "
+        z += tempx + feeds_to_html(parse_feeds(y, bloom))
+        totx += len(tempx)
         print x
-        if len(z) > 15:
-            send_email("RSS digest: " + x,
-                       z,
-                       setup)
+    if len(z) > 2*totx + 15:
+        send_email("RSS digest",
+                   z,
+                   setup)
     bloom.tofile(open(bloomloc,'w'))
 
 if __name__ == "__main__":
