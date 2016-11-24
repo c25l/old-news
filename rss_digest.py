@@ -5,6 +5,9 @@ import feedparser
 import xml.etree.ElementTree as etree
 import time
 import smtplib
+import email
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import urllib
 import json
 import sys
@@ -48,32 +51,55 @@ def parse_feeds(feed_uris,bloom):
         return [{'title': feed_title(feed), 'entries': unseen_items_for_feed(feed.entries, bloom)} for feed in feeds]
 
 
-def feeds_to_org(feeds):
-    outstr=""
+
+def send_email(title, body, setup):
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = title
+    msg['From'] = "\"Rss Digest\" <" +setup['email_from']+">"
+    msg['To'] = setup['email_to']
+    html = body.encode('utf-8', 'ignore')
+    part2 = MIMEText(html, 'html')
+    msg.attach(part2)
+    s = smtplib.SMTP_SSL('smtp.gmail.com',465)
+    s.login(setup['email_from'], setup['email_pass'])
+    s.sendmail(setup['email_from'], setup['email_to'], msg.as_string())
+    s.quit()
+    print "sent email"
+    return True
+
+
+def feeds_to_html(feeds):
+    outstr="<body>"
     for x in feeds:
         if x['entries']:
-            outstr+="*** "+x['title']+"\n"
+            outstr+="<h2>"+x['title']+"</h2><br>"
             for y in x['entries']:
-                outstr+="**** [[" + y['link'] +"]["+ y['title']+"]]\n"
-    return outstr
+                outstr+="<a href=" + y['link'] +">"+y['title']+"</a><br>\n"
+            outstr+="<hr>"
+    return outstr+"</body>"
 
 
 def main():
-    #setup=json.load(open(sys.argv[1],'r'))
-    feeds=json.load(open(sys.argv[1],'r'))
+    setup=json.load(open(sys.argv[1],'r'))
+    feeds=json.load(open(sys.argv[2],'r'))
     bloom=pb.BloomFilter(1000000)
-    bloomloc=sys.argv[2]
+    bloomloc=sys.argv[3]
     try:
         bloom=bloom.fromfile(open(bloomloc,'r'))
     except:
         print "starting over"
         pass
-    out = "\n* " + datetime.datetime.today().strftime("%Y-%m-%d") + "\n"
+    z = ""
+    totx= 0
     for x,y in feeds.iteritems():
-        out += "** " + x + "\n"
-        out += feeds_to_org(parse_feeds(y, bloom))
-    with open("./Rss_digest.org", 'a') as outf:
-        outf.write(out.encode('utf8'))
+        tempx ="<h1>" + x + "</h1><br>\n "
+        z += tempx + feeds_to_html(parse_feeds(y, bloom))
+        totx += len(tempx)
+        print x
+    if len(z) > 2*totx + 15:
+        send_email("RSS digest",
+                   z,
+                   setup)
     bloom.tofile(open(bloomloc,'w'))
 
 if __name__ == "__main__":

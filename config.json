@@ -1,18 +1,9 @@
-{
-    "programming" : [
-	"http://blog.fogus.me/feed/",
-	"http://planet.emacsen.org/atom.xml",
-        "https://planet.haskell.org/rss20.xml"],
-    "science": [
-        "http://bactra.org/weblog/index.rss",
-	"http://apod.nasa.gov/apod.rss",
-	"http://allendowney.blogspot.com/feeds/posts/default",
-	"http://www.stat.columbia.edu/~cook/movabletype/mlm/atom.xml",
-	"http://www.unofficialgoogledatascience.com/feeds/posts/default",
-	"http://varianceexplained.org/feed.xml"],
+{"science": [
+    "http://www.unofficialgoogledatascience.com/feeds/posts/default"],
     "culture": [
         "http://thebloggess.com/feed/",
-	"http://www.shutupandsitdown.com/blog/feed.xml",
-	"http://www.interfluidity.com/feed",
-	"http://feeds.feedburner.com/MeFi/PopularPosts7"
-        ]}
+        "http://www.longmontcolorado.gov/Home/Components/RssFeeds/RssFeed/View?id=5",
+	"http://literati.club/comments/feed",
+	"http://literati.club/feed/",
+    "http://www.metafilter.com/mymefi/AF8CE07E0976FF4F/rss"],
+    "comics": ["http://www.smbc-comics.com/rss.php"]}
