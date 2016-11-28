@@ -24,7 +24,7 @@ def parse_item_or_list(either):
 
 def bloom_detect(x, bloom):
     inf=feed_info(x)
-    key = inf['title']+ "////" + inf['summary']
+    key = inf['link'] #inf['title']+ "////" + inf['summary']
     if key not in bloom:
         bloom.add(key)
         return inf
@@ -69,14 +69,14 @@ def send_email(title, body, setup):
 
 
 def feeds_to_html(feeds):
-    outstr="<body>"
+    outstr=""
     for x in feeds:
         if x['entries']:
             outstr+="<h2>"+x['title']+"</h2><br>"
             for y in x['entries']:
                 outstr+="<a href=" + y['link'] +">"+y['title']+"</a><br>\n"
             outstr+="<hr>"
-    return outstr+"</body>"
+    return outstr
 
 
 def main():
@@ -90,15 +90,15 @@ def main():
         print "starting over"
         pass
     z = ""
-    totx= 0
     for x,y in feeds.iteritems():
-        tempx ="<h1>" + x + "</h1><br>\n "
-        z += tempx + feeds_to_html(parse_feeds(y, bloom))
-        totx += len(tempx)
-        print x
-    if len(z) > 2*totx + 15:
+        temp_title ="<h1>" + x + "</h1><br>\n "
+        temp_feeds = feeds_to_html(parse_feeds(y, bloom))
+        if len(temp_feeds)>0:
+            z += temp_title+temp_feeds
+        print x, len(temp_feeds)
+    if len(z) > 0:
         send_email("RSS digest",
-                   z,
+                   "<body>\n" + z + "</body>",
                    setup)
     bloom.tofile(open(bloomloc,'w'))
 
