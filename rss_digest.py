@@ -74,7 +74,7 @@ def feeds_to_html(feeds):
         if x['entries']:
             outstr+="<h2>"+x['title']+"</h2><br>"
             for y in x['entries']:
-                outstr+="<a href=" + y['link'] +">"+y['title']+"</a><br>\n"
+                outstr+="<a href=" + y['link'] +">"+y['title']+"</a><br>\n" + y['summary'] + "\n<hr>\n"
             outstr+="<hr>"
     return outstr
 

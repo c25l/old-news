@@ -8,7 +8,8 @@
         "http://www.longmontcolorado.gov/Home/Components/RssFeeds/RssFeed/View?id=5",
 	"http://literati.club/comments/feed",
 	"http://literati.club/feed/",
-	"http://www.metafilter.com/mymefi/AF8CE07E0976FF4F/rss"
+	"http://www.metafilter.com/mymefi/AF8CE07E0976FF4F/rss",
+        "https://howtobeastoic.wordpress.com/feed/"
     ],
  "comics": ["http://www.smbc-comics.com/rss.php"
 	   ]
