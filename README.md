@@ -1,4 +1,4 @@
-# Rss_Digest
+# old-news
 
 This is a python script that is designed to take a json of rss feed locations and a bloom filter. 
 You run it, and it gives you a since-last-time's worth of new feed activity. 
@@ -26,3 +26,8 @@ Rss->Pinboard. Maybe daily check frequency, any new items are just sent over,
 after whatever detection scheme is used (maybe just datetime?). Figure out API, 
 would be like email but no notifications and silent unless checked. Probably also
 want to consider aggressive tagging so as to be able to filter/delete as wanted.
+
+
+https://pinboard.in/api/
+need api key in config json, which is easy, and to emit to the api instead of email. 
+Note: 3 second throttling for requests from any user, so build that in.
