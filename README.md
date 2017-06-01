@@ -12,3 +12,10 @@
 file and stable output, but also accept json for subs and maybe also serialize a 
 big, global rss feed out of it?
 4) twitter integration? May be a challenge.
+
+## Alternate direction:
+
+Rss->Pinboard. Maybe daily check frequency, any new items are just sent over, 
+after whatever detection scheme is used (maybe just datetime?). Figure out API, 
+would be like email but no notifications and silent unless checked. Probably also
+want to consider aggressive tagging so as to be able to filter/delete as wanted.
